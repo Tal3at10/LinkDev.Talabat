@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Concurrent;
 using LinkDev.Talabat.Core.Domain.Common;
 using LinkDev.Talabat.Core.Domain.Contracts.Presistance;
-using LinkDev.Talabat.Core.Domain.Entities.Products;
 using LinkDev.Talabat.Infrastructure.Persistence.Data;
-using LinkDev.Talabat.Infrastructure.Presistence.Repositories;
-using LinkDev.Talabat.Infrastructure.Presistence.Repositories.GenericeRepository;
+using LinkDev.Talabat.Infrastructure.Presistence.GenericeRepository;
 
 namespace LinkDev.Talabat.Infrastructure.Presistence.UnitOfWork
 {

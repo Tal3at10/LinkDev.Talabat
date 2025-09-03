@@ -13,6 +13,7 @@ namespace LinkDev.Talabat.Core.Domain.Contracts.Presistance
 
         Task<IEnumerable<TEntity>> GetAllAsync(bool withTracking = false);
         Task<IEnumerable<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity, TKey> specifications,bool withTracking = false);
+        Task<int> GetCountAsync(ISpecifications<TEntity, TKey> specifications);
 
         Task AddAsync(TEntity entity);
            

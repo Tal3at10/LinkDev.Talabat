@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LinkDev.Talabat.Core.Application.Abstraction.Models.Products;
-
-namespace LinkDev.Talabat.Core.Application.Abstraction.Common
+﻿namespace LinkDev.Talabat.Core.Application.Abstraction.Common
 {
     public class Pagination<T>
     {
@@ -16,11 +9,12 @@ namespace LinkDev.Talabat.Core.Application.Abstraction.Common
         public int Count { get; set; }
         public IEnumerable<T> Data { get; set; }
 
-        public Pagination(int pageIndex, int pageSize, IEnumerable<T> data)
+        public Pagination(int pageIndex, int pageSize, int count, IEnumerable<T> data)
         {
             PageIndex = pageIndex;
             PageSize = pageSize;
             Data = data;
+            Count = count;
 
         }
     }

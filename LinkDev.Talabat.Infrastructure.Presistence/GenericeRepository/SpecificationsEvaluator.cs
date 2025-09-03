@@ -7,7 +7,7 @@ using LinkDev.Talabat.Core.Domain.Common;
 using LinkDev.Talabat.Core.Domain.Contracts;
 using Microsoft.EntityFrameworkCore;
 
-namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericRepository
+namespace LinkDev.Talabat.Infrastructure.Presistence.GenericeRepository
 {
     internal static class SpecificationsEvaluator<TEntity, TKey>
         where TEntity : BaseEntity<TKey>
@@ -27,21 +27,21 @@ namespace LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericReposit
                 query = query.Where(specifications.Critaria);
             }
 
+            // Apply ordering BEFORE pagination
             if (specifications.OrderByDes is not null)
             {
                 query = query.OrderByDescending(specifications.OrderByDes);
             }
-            else if(specifications.OrderByDes is not null)
+            else if (specifications.OrderBy is not null) // ✅ Fixed: was checking OrderByDes twice
             {
                 query = query.OrderBy(specifications.OrderBy);
-
             }
 
-            if(specifications.IsPaginationEnabled)
+            // Apply pagination AFTER ordering
+            if (specifications.IsPaginationEnabled)
             {
                 query = query.Skip(specifications.Skip).Take(specifications.Take);
             }
-
 
             // Apply includes (navigation properties)
             query = specifications.Includes.Aggregate(

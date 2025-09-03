@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LinkDev.Talabat.Core.Domain.Entities.Products;
+﻿using LinkDev.Talabat.Core.Domain.Entities.Products;
 
 namespace LinkDev.Talabat.Core.Domain.Specifications.Products
 {
     public class ProductWithBrandAndCategorySpecifications : BaseSpecifications<Product, int>
     {
         //the object is created via constructor is used for building the query that will get all products.
-        public ProductWithBrandAndCategorySpecifications(string? sort, int? brandId, int? categoryId,int pageSize, int pageIndex)
+        public ProductWithBrandAndCategorySpecifications(string? sort, int? brandId, int? categoryId,int pageSize, int pageIndex, string? search)
             : base
             (
-                  p => 
+                  p =>
+                 (string.IsNullOrEmpty(search) || p.NormalizedName.Contains(search.ToUpper()))
+                  &&
                   (!brandId.HasValue || p.BrandId == brandId.Value)
                   &&
                   (!categoryId.HasValue || p.CategoryId == categoryId.Value)

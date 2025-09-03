@@ -3,10 +3,9 @@ using LinkDev.Talabat.Core.Domain.Contracts;
 using LinkDev.Talabat.Core.Domain.Contracts.Presistance;
 using LinkDev.Talabat.Core.Domain.Entities.Products;
 using LinkDev.Talabat.Infrastructure.Persistence.Data;
-using LinkDev.Talabat.Infrastructure.Persistence.Repositories.GenericRepository;
 using Microsoft.EntityFrameworkCore;
 
-namespace LinkDev.Talabat.Infrastructure.Presistence.Repositories.GenericeRepository
+namespace LinkDev.Talabat.Infrastructure.Presistence.GenericeRepository
 {
     internal class GenericRepository<TEntity, TKey> : IGenericRepository<TEntity, TKey>
         where TEntity : BaseAuditableEntity<TKey>
@@ -50,6 +49,11 @@ namespace LinkDev.Talabat.Infrastructure.Presistence.Repositories.GenericeReposi
         public async Task<TEntity?> GetAsync(TKey id)
         {
             return await _dbContext.Set<TEntity>().FindAsync(id);
+        }
+
+        public async Task<int> GetCountAsync(ISpecifications<TEntity, TKey> specifications)
+        {
+            return await ApplySpecifications(specifications).CountAsync();
         }
 
         public async Task<IEnumerable<TEntity>> GetWithSpecAsync(ISpecifications<TEntity, TKey> specifications)
